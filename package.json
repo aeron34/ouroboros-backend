@@ -1,0 +1,42 @@
+{
+  "name": "ouro-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "local": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@extra-array/chunk.min": "^2.10.18",
+    "@sendgrid/mail": "^7.6.1",
+    "array-divide-equally": "0.0.4",
+    "axios": "^1.5.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "deep-object-diff": "^1.1.9",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "extra-array": "^2.10.18",
+    "generate-password": "^1.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.15",
+    "knex-paginate": "^3.1.1",
+    "node-fetch": "^2.7.0",
+    "pg": "^8.7.1",
+    "round": "^2.0.1",
+    "round-to": "^6.0.0",
+    "sort-array": "^4.1.5",
+    "stripe": "^14.22.0",
+    "time-convert": "^0.0.2",
+    "unq-arr": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
