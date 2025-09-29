@@ -5,7 +5,7 @@ const Stripe = require('stripe');
 const stripe = Stripe(`${process.env.stp_live_key}`);
 const endpointSecret = `${process.env.stp_hook_live}`;
 
-router.post('/hook', (req, res) => {
+router.post('/hook', async (request, response) => {
   const sig = request.headers['stripe-signature'];
 
   let event;
@@ -17,7 +17,7 @@ router.post('/hook', (req, res) => {
     return;
   }
   
-  res.status(300).send('WIP')
+  response.send();
 })
 
 router.post('/', (req, res) => {
