@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Stripe = require('stripe');
 
-const stripe = Stripe(`${process.env.stp_test_key}`);
-const endpointSecret = `${process.env.stp_wbh_key}`;
-
+const stripe = Stripe(`${process.env.stp_live_key}`);
+const endpointSecret = `${process.env.stp_hook_live}`;
 
 router.post('/hook', (req, res) => {
   const sig = request.headers['stripe-signature'];
