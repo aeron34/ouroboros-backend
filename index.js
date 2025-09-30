@@ -10,7 +10,7 @@ const knx = require('knex')({
     port: process.env.db_port,
     password: process.env.password,
     database: process.env.database,
-    ssl: { rejectUnauthorized: false }   // quick fix
+    ssl: { rejectUnauthorized: false }
   },
   pool: { min: 0, max: 10 } // Configure the pool size here
 });
@@ -34,11 +34,6 @@ paths.map(path => {
 })
 
 router.get('/', (req, res) => {
-
-  // knx("testing table").select('*')
-  // .then(obj => {
-  //   res.json(obj)
-  // }).catch(err => res.status(500).send(err))
   res.status(300).send('default route.')
 })
 
