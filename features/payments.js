@@ -10,6 +10,8 @@ const webhook = async (req, res, next) => {
     const sig = req.headers['stripe-signature'];
     
     let event;
+    console.log("Entering Webhook");
+    
     try {
       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err) {
