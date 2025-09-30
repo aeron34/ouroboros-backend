@@ -9,7 +9,8 @@ const knx = require('knex')({
     user: process.env.user,
     port: process.env.db_port,
     password: process.env.password,
-    database: process.env.database
+    database: process.env.database,
+    ssl: { rejectUnauthorized: false }   // quick fix
   },
   pool: { min: 0, max: 10 } // Configure the pool size here
 });
@@ -18,7 +19,7 @@ const knx = require('knex')({
 router.post(
   "/payments/hook",
   express.raw({ type: "application/json" }),
-  require("./features/payments").webhook
+  require("./features/payments")(knx).webhook
 );
 
 router.use(express.urlencoded({extended: false}));
@@ -34,17 +35,11 @@ paths.map(path => {
 
 router.get('/', (req, res) => {
 
-  knx("testing table").select('*')
-  .then(obj => {
-    res.json(obj)
-  }).catch(err => res.status(500).send(err))
-  // knx('testing table').insert({
-  //   test: 'finish'
-  // }).then(resp => {
-  //   res.send('good')
-  // }).catch(err => res.status(500).send(err));
-
-  //res.status(300).send('default route.')
+  // knx("testing table").select('*')
+  // .then(obj => {
+  //   res.json(obj)
+  // }).catch(err => res.status(500).send(err))
+  res.status(300).send('default route.')
 })
 
 router.listen(process.env.PORT);
