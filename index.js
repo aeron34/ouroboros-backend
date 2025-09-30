@@ -2,6 +2,18 @@ const express = require('express')
 const router = express();
 require('dotenv').config();
 
+const knx = require('knex')({
+  client: 'pg',
+  connection: {
+    host: process.env.host,
+    user: process.env.user,
+    port: process.env.db_port,
+    password: process.env.password,
+    database: process.env.database
+  },
+  pool: { min: 0, max: 10 } // Configure the pool size here
+});
+
 // Stripe webhook route - MUST be before express.json() middleware
 router.post(
   "/payments/hook",
@@ -21,7 +33,18 @@ paths.map(path => {
 })
 
 router.get('/', (req, res) => {
-  res.status(300).send('default route.')
+
+  knx("testing table").select('*')
+  .then(obj => {
+    res.json(obj)
+  }).catch(err => res.status(500).send(err))
+  // knx('testing table').insert({
+  //   test: 'finish'
+  // }).then(resp => {
+  //   res.send('good')
+  // }).catch(err => res.status(500).send(err));
+
+  //res.status(300).send('default route.')
 })
 
 router.listen(process.env.PORT);
