@@ -15,7 +15,10 @@ router.use(express.json());
 const paths = ['user', 'payments']
 
 /* These routes will each be turned into microservices in the future */
-paths.map(path => router.use(`/${path.split('/')[0]}`, require(`./features/${path}`)))
+paths.map(path => {
+  const module = require(`./features/${path}`);
+  router.use(`/${path.split('/')[0]}`, module.router || module);
+})
 
 router.get('/', (req, res) => {
   res.status(300).send('default route.')
