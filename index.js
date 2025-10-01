@@ -25,7 +25,7 @@ router.post(
 router.use(express.urlencoded({extended: false}));
 router.use(express.json());
 
-const paths = ['user', 'payments']
+const paths = ['user', 'payments', 'phone']
 
 /* These routes will each be turned into microservices in the future */
 paths.map(path => {
