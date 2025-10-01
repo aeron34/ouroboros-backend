@@ -10,8 +10,6 @@ const webhook = async (req, res, next) => {
     const sig = req.headers['stripe-signature'];
     
     let event;
-    console.log("Entering Webhook");
-    
     try {
       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err) {
@@ -22,6 +20,14 @@ const webhook = async (req, res, next) => {
 
     // Handle successful purchase events
     if (event.type === 'checkout.session.completed') {
+      
+      await knx('testing table').insert({
+        text: 'added checkout'
+      }).then(resp => {
+      }).catch(err => 
+        next(err)
+      );
+
       await handleSuccessfulPurchase(event.data.object);
     } else {
       console.log(`Unhandled event type: ${event.type}`);
@@ -44,4 +50,7 @@ router.post('/', (req, res) => {
   res.status(300).send('WIP')
 })
 
-module.exports = { router, webhook }
+module.exports = function(k) {
+  knx = k; 
+  return { router, webhook }
+}

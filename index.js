@@ -19,7 +19,7 @@ const knx = require('knex')({
 router.post(
   "/payments/hook",
   express.raw({ type: "application/json" }),
-  require("./features/payments").webhook
+  require("./features/payments")(knx).webhook
 );
 
 router.use(express.urlencoded({extended: false}));
